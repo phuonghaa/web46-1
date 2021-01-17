@@ -36,7 +36,6 @@ function calAverageMark() {
 function writeCountStudentGet10MarkToFile() {
   let count = data.filter(student => student.mark === 10).length
   fs.writeFileSync("output.txt",`${count}`)
-  console.log(count);
 }
 writeCountStudentGet10MarkToFile()
 
