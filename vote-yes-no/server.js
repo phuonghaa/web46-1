@@ -11,18 +11,28 @@ app.use(express.json());
 
 
 app.use(express.static('public'));
-// => sinh ra các đường dẫn như sau
-// app.get('/ask/index.html', (req, res) => {  
-//   res.sendFile(path.resolve(__dirname, './public/ask/index.html'));
-// })
-// app.get('/ask/style.css', (req, res) => {  
-//   res.sendFile(path.resolve(__dirname, './public/ask/style.html'));
-// })
-// app.get('/home/index.html', (req, res) => {  
-//   res.sendFile(path.resolve(__dirname, './public/home/style.html'));
-// })
 
-app.get('/', (req, res) => {  
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './public/home/index.html'))
+})
+
+app.get('/get-random-question', (req, res) => {
+  let data;
+  try {
+    data = JSON.parse(fs.readFileSync('data.json'));
+    console.log(data);
+  } catch (err) {
+    data= [];
+  }
+  const randomQues = data[Math.floor((Math.random()*data.length))]
+  res.send({
+    success: 1,
+    content: randomQues,
+  })
+
+})
+
+app.get('/ask', (req, res) => {  
   res.sendFile(path.resolve(__dirname, './public/ask/index.html'));
 })
 
@@ -46,6 +56,10 @@ app.post('/create-question',  (req, res) => {
     success: 1,
     data: newQuestion
   })
+})
+
+app.get('/redirect-home', (req, res) => {
+  res.redirect('')
 })
 
 app.get('*',  (req, res) => {  
