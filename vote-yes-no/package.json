@@ -1,7 +1,7 @@
 {
   "name": "vote-yes-no",
   "version": "1.0.0",
-  "description": "",
+  "description": "Trang web để tạo câu hỏi",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon server",
@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "encode": "4.2.0"
   }
 }
