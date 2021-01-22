@@ -6,6 +6,8 @@ try {
 } catch (err) {
   console.log('Lỗi', err);
 }
+//const data = require('./data.json')  //only for json file
+
 if (!data) return;
 
 
