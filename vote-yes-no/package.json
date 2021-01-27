@@ -12,7 +12,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "encode": "4.2.0",
     "express": "^4.17.1"
   }
 }

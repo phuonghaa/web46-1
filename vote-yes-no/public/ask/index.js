@@ -19,6 +19,7 @@ createForm.addEventListener('submit', (event) => {
     .then(() => {
       alert('New question added successfully!')
       window.open('/', '_self')
+      // window.location.href = "/"
     })
   }
 })
@@ -30,3 +31,9 @@ textAreaQuestion.onkeyup = () => {
   charCount.innerHTML = charNum;
 
 }
+
+// textAreaQuestion.addEventListener(input, () => {
+//   const charNum = textAreaQuestion.value.length;
+//   charCount.innerHTML = charNum;
+
+// })

@@ -20,7 +20,6 @@ app.get('/get-random-question', (req, res) => {
   let data;
   try {
     data = JSON.parse(fs.readFileSync('data.json'));
-    console.log(data);
   } catch (err) {
     data= [];
   }
@@ -62,9 +61,47 @@ app.get('/redirect-home', (req, res) => {
   res.redirect('')
 })
 
+app.put('/add-vote/:idQuestion', (req, res) => {
+  const { idQuestion } = req.params;
+  const { type } = req.body;
+  let data;
+  try {
+    data = JSON.parse(fs.readFileSync('data.json'));
+  } catch (err) {
+    data= [];
+  }
+  const foundQuestion = data.find(question => {
+    const sameId = parseInt(question._id) === parseInt(idQuestion)
+    return sameId
+  })
+  if(!foundQuestion){
+    return res.send({
+      success: 0,
+      data: null
+    }) 
+  } 
+
+  if (type === 'yes' || type === 'no') {
+    foundQuestion[type]++;
+  } else {
+    return res.send({
+      success: 0,
+      data: null
+    })
+  }
+  fs.writeFileSync('./data.json', JSON.stringify(data))
+
+  return res.send({
+    success: 1,
+    data: foundQuestion,
+  })
+})
+
 app.get('*',  (req, res) => {  
   res.sendFile(path.resolve(__dirname, './public/404/index.html'));
 })
+
+
 
 // app.get('/style.css', (req, res) => {  
 //   res.sendFile(path.resolve(__dirname, './style.css'));
